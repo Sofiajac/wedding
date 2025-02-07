@@ -1,0 +1,14 @@
+button {
+  font-size: 1rem;
+  color: black;
+  background-color: white;
+  padding: 1rem;
+  border: 2px solid black;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  &:active {
+    opacity: 0.5;
+  }
+}
