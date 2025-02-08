@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-const RsvpForm: React.FC = () => {
+
+interface RsvpFormProps {
+  apiUrl: string;
+}
+
+ function RsvpForm({ apiUrl }: RsvpFormProps) {
+  // const RsvpForm: React.FC = ({ apiUrl } : RsvpFormProps) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [attending, setAttending] = useState<boolean>(false);
@@ -8,7 +14,7 @@ const RsvpForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/rsvp', {
+      const response = await fetch(`${apiUrl}/rsvp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
