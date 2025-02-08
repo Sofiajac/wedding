@@ -13,7 +13,11 @@ function App() {
           <h1 className="fancyText h1">Johan & Emil</h1>
           <h2 className="fancyText h2">16-17 augusti 2025</h2>
           <div className="buttonWrapper">
-            <Button title="o.s.a" wide />
+            <Button
+              title="o.s.a"
+              wide
+              onClick={() => null} // FIXME
+            />
           </div>
         </div>
         <Navbar />

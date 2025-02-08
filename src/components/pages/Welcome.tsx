@@ -1,7 +1,15 @@
 import React from "react";
+import { useState } from 'react';
 import Button from "../Button";
+import RsvpForm from './RsvpForm';
 
 export const Welcome = () => {
+  const [showRsvpForm, setShowRsvpForm] = useState<boolean>(false);
+
+  const toggleForm = () => {
+    setShowRsvpForm(!showRsvpForm);
+  };
+
   return (
     <div className="pageContent">
       <div className="headingsContainer">
@@ -18,7 +26,11 @@ export const Welcome = () => {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <Button title="o.s.a." />
+      <Button
+        title="o.s.a."
+        onClick={toggleForm}
+      />
+      {showRsvpForm && <RsvpForm />}
     </div>
   );
 };
