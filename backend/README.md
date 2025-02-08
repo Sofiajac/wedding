@@ -22,3 +22,20 @@ You need to do this initially and when new packages have been added.
 ## Start the backend application
 
     backend/app.py
+
+## Development
+Activate the Python virtual environment. See above.
+
+From the project root, change directory to `backend`:
+
+    cd backend
+
+### Install a new Python package
+    pip install <package_name>
+    pip freeze >> requirements.txt
+
+### Export the database as a CSV file
+    sqlite3 app.db -header -csv "SELECT * FROM rsvp;" > rsvp.csv
+
+### Export the database as a JSON file
+    sqlite3 app.db -header -json "SELECT * FROM rsvp;" > rsvp.json
