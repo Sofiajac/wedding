@@ -7,15 +7,26 @@ const RsvpForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/rsvp', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ name, email, attending })
-    });
-    const result = await response.json();
-    console.log('RSVP received:', result);
+    try {
+      const response = await fetch('http://localhost:5000/rsvp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, attending })
+      });
+      const result = await response.json();
+      if (response.ok) {
+        console.log('RSVP received:', result);
+        alert('RSVP received successfully!');
+      } else {
+        console.error('Error:', result);
+        alert('Failed to submit RSVP.');
+      }
+    } catch (error) {
+      console.error('Error submitting RSVP:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (
