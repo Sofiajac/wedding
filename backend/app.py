@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+import csv
+import io
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
@@ -25,6 +27,18 @@ def rsvp():
     db.session.add(new_rsvp)
     db.session.commit()
     return jsonify({'message': 'RSVP received'}), 200
+
+@app.route('/download_csv', methods=['GET'])
+def download_csv():
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(['id', 'name', 'email', 'attending'])
+    rsvps = RSVP.query.all()
+    for rsvp in rsvps:
+        writer.writerow([rsvp.id, rsvp.name, rsvp.email, rsvp.attending])
+    output.seek(0)
+    byte_output = io.BytesIO(output.getvalue().encode())
+    return send_file(byte_output, mimetype='text/csv', download_name='rsvp.csv', as_attachment=True)
 
 if __name__ == '__main__':
     with app.app_context():
