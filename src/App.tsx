@@ -11,7 +11,7 @@ function App() {
       <header className="header">
         <div className="banner">
           <div className="fancyText">Vi gifter oss</div>
-          <div className="fancyText large">Emil & Johan</div>
+          <div className="fancyText large">Johan & Emil</div>
           <div className="fancyText">16-17 augusti 2025</div>
         </div>
         <Navbar />
