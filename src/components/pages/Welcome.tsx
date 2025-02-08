@@ -31,6 +31,10 @@ export const Welcome = () => {
         onClick={toggleForm}
       />
       {showRsvpForm && <RsvpForm />}
+      <br />
+      <a href="http://localhost:5000/download_csv" download>
+        <button>Download RSVPs as CSV</button>
+      </a>
     </div>
   );
 };
