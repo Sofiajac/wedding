@@ -3,7 +3,11 @@ import { useState } from 'react';
 import Button from "../Button";
 import RsvpForm from './RsvpForm';
 
-export const Welcome = () => {
+interface WelcomeProps {
+  apiUrl: string;
+}
+// export function Welcome({ apiUrl }: WelcomeProps) {
+export const Welcome = ({ apiUrl }: WelcomeProps) => {
   const [showRsvpForm, setShowRsvpForm] = useState<boolean>(false);
 
   const toggleForm = () => {
@@ -30,9 +34,9 @@ export const Welcome = () => {
         title="o.s.a."
         onClick={toggleForm}
       />
-      {showRsvpForm && <RsvpForm />}
+      {showRsvpForm && <RsvpForm apiUrl={apiUrl} />}
       <br />
-      <a href="http://localhost:5000/download_csv" download>
+      <a href={`${apiUrl}/download_csv`} download>
         <button>Download RSVPs as CSV</button>
       </a>
     </div>
