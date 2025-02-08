@@ -10,7 +10,7 @@ function App() {
     <div className="container">
       <header className="header">
         <div className="imageBanner">
-          <h1 className="fancyText h1">Emil & Johan</h1>
+          <h1 className="fancyText h1">Johan & Emil</h1>
           <h2 className="fancyText h2">16-17 augusti 2025</h2>
           <div className="buttonWrapper">
             <Button title="o.s.a" wide />
