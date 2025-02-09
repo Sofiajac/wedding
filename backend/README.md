@@ -39,3 +39,8 @@ From the project root, change directory to `backend`:
 
 ### Export the database as a JSON file
     sqlite3 app.db -header -json "SELECT * FROM rsvp;" > rsvp.json
+
+## Deployment
+From the project root:
+
+    ./deploy.sh
