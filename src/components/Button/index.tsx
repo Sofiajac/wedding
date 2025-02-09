@@ -6,9 +6,14 @@ interface ButtonProps {
   title: string;
   /** Whether the button can be interacted with */
   // disabled: boolean;
+  onClick: () => void;
 }
 
-function Button({ title }: ButtonProps) {
-  return <button>{title}</button>;
+function Button({ title, onClick }: ButtonProps) {
+  return (
+    <button onClick={onClick}>
+      {title}
+    </button>
+  );
 }
 export default Button;
