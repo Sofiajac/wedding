@@ -1,22 +1,21 @@
 nav {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: white;
-  // padding: 1rem;
+  padding-left: 8rem;
+  @media (max-width: 600px) {
+    padding-left: 0;
+  }
   ul {
     display: flex;
     li {
       list-style: none;
       a {
-        text-decoration: none;
-        color: black;
-        font-size: 1rem;
         display: inline-block;
-        cursor: pointer;
-        padding: 0.5rem 0;
+        color: black;
         margin: 1rem 1rem;
-        border-bottom: 1px solid white;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #fdf5e5;
+        text-decoration: none;
+        cursor: pointer;
         &.active {
           border-color: black;
         }
