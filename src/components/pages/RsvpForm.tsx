@@ -62,12 +62,13 @@ function RsvpForm({ apiUrl }: RsvpFormProps) {
         const result = await response.json();
         if (response.ok) {
           console.log('RSVP received:', result);
-          alert('RSVP received successfully!');
         } else {
           console.error('Error:', result);
           alert('Failed to submit RSVP.');
+          break;
         }
       }
+      alert('RSVP received successfully!');
     } catch (error) {
       console.error('Error submitting RSVP:', error);
       alert('An error occurred. Please try again.');
