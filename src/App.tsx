@@ -5,22 +5,31 @@ import Button from "./components/Button";
 import Navbar from "./components/Navbar";
 import { FAQ, Program, Travel, Welcome } from "./components/pages";
 
-function App() {
+interface AppProps {
+  baseUrl: string;
+}
+
+export function App({ baseUrl }: AppProps) {
+  const apiUrl = process.env.NODE_ENV === "production" ? `${baseUrl}/api` : "http://localhost:5000";
   return (
     <div className="container">
       <header className="header">
         <div className="imageBanner">
-          <h1 className="fancyText h1">Emil & Johan</h1>
+          <h1 className="fancyText h1">Johan & Emil</h1>
           <h2 className="fancyText h2">16-17 augusti 2025</h2>
           <div className="buttonWrapper">
-            <Button title="o.s.a" wide />
+            <Button
+              title="o.s.a"
+              wide
+              onClick={() => null} // FIXME
+            />
           </div>
         </div>
         <Navbar />
       </header>
       <div className="pagesContainer">
         <Routes>
-          <Route path="/" element={<Welcome />} />
+          <Route path="/" element={<Welcome apiUrl={apiUrl} />} />
           <Route path="/program" element={<Program />} />
           <Route path="/travel" element={<Travel />} />
           <Route path="/FAQ" element={<FAQ />} />
