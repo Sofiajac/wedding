@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.scss';
 import InputField from '../Input';
-import { Person } from '../pages/RsvpForm';
+import { Person } from '../RsvpForm';
 import RadioButton from '../Radiobutton';
 
 export interface PersonProps {

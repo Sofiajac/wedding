@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 import Button from "../Button";
-import RsvpForm from './RsvpForm';
+import RsvpForm from '../RsvpForm';
 
 interface WelcomeProps {
   apiUrl: string;
