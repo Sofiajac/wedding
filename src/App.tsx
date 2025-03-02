@@ -10,7 +10,7 @@ interface AppProps {
 }
 
 export function App({ baseUrl }: AppProps) {
-  const apiUrl = process.env.NODE_ENV === "production" ? `${baseUrl}/api` : "http://localhost:5000";
+  const apiUrl = process.env.NODE_ENV === "production" ? `${baseUrl}/api` : "http://localhost:5001";
   return (
     <div className="container">
       <header className="header">
