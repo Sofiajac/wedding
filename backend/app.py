@@ -54,6 +54,7 @@ def rsvp():
           rsvp_to_update.email = email
           rsvp_to_update.attending = attending
           rsvp_to_update.food_allergy = food_allergy
+          db.session.commit()
           return jsonify({'message': 'RSVP updated'}), 200
 
     new_rsvp = RSVP(name=name, email=email, attending=attending, food_allergy=food_allergy)
