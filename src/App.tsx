@@ -9,19 +9,23 @@ function App() {
   return (
     <div className="container">
       <header className="header">
-        <div className="banner">
-          <div className="fancyText">Vi gifter oss</div>
-          <div className="fancyText large">Emil & Johan</div>
-          <div className="fancyText">16-17 augusti 2025</div>
+        <div className="imageBanner">
+          <h1 className="fancyText h1">Emil & Johan</h1>
+          <h2 className="fancyText h2">16-17 augusti 2025</h2>
+          <div className="buttonWrapper">
+            <Button title="o.s.a" wide />
+          </div>
         </div>
         <Navbar />
+      </header>
+      <div className="pagesContainer">
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/program" element={<Program />} />
           <Route path="/travel" element={<Travel />} />
           <Route path="/FAQ" element={<FAQ />} />
         </Routes>
-      </header>
+      </div>
     </div>
   );
 }

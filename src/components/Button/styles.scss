@@ -1,14 +1,32 @@
 button {
-  font-size: 1rem;
-  color: black;
-  background-color: white;
+  min-width: 8rem;
+  max-width: 16rem;
   padding: 1rem;
+  color: black;
+  background-color: transparent;
   border: 2px solid black;
-  &:hover {
-    background-color: black;
-    color: white;
+  font-size: 1rem;
+  &.wide {
+    min-width: 16rem;
+  }
+  @media (hover: hover) {
+    &:hover {
+      background-color: black;
+      color: white;
+    }
   }
   &:active {
     opacity: 0.5;
+    @media not all and (hover: hover) {
+      &:hover {
+        background-color: black;
+        opacity: 1;
+        color: white;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    max-width: none;
   }
 }
