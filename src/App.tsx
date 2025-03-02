@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Button from "./components/Button";
 import Navbar from "./components/Navbar";
-import { FAQ, Program, Travel, Welcome } from "./components/pages";
+import { FAQ, Program, Travel, Welcome } from "./pages";
 
 interface AppProps {
   baseUrl: string;

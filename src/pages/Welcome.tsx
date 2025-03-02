@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import { useState } from 'react';
-import Button from "../Button";
-import RsvpForm from '../RsvpForm';
+import Button from '../components/Button';
+import RsvpForm from '../components/RsvpForm';
 
 interface WelcomeProps {
   apiUrl: string;
@@ -30,10 +30,7 @@ export const Welcome = ({ apiUrl }: WelcomeProps) => {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <Button
-        title="o.s.a."
-        onClick={toggleForm}
-      />
+      <Button title="o.s.a." onClick={toggleForm} />
       {showRsvpForm && <RsvpForm apiUrl={apiUrl} />}
       <br />
       <a href={`${apiUrl}/download_csv`} download>
