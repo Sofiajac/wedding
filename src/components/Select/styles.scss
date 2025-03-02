@@ -1,0 +1,11 @@
+.select-container {
+  display: flex;
+  flex-direction: column;
+  
+  select {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+      'Droid Sans', 'Helvetica Neue', sans-serif;
+  }
+}
