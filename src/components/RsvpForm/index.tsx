@@ -46,15 +46,23 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     );
   };
 
-  const addPerson = (newPerson: Person) => {
-    setPeople((prevPeople) => [...prevPeople, newPerson]);
-  };
-
   const setNumPeople = (numPeople: number) => {
-    for (let i = people.length; i < numPeople; ++i) {
-      const person = { ...emptyPerson, email: email };
-      addPerson(person);
-    }
+    setPeople((prevPeople) => {
+      if (numPeople > prevPeople.length) {
+        // Increase people
+        const newPeople = Array.from(
+          { length: numPeople - prevPeople.length },
+          () => ({
+            ...emptyPerson,
+            email: email,
+          })
+        );
+        return [...prevPeople, ...newPeople];
+      } else {
+        // Decrease people
+        return prevPeople.slice(0, numPeople);
+      }
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
