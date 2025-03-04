@@ -1,16 +1,51 @@
 #!/usr/bin/env python3
 
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from flask import Flask, request, jsonify, send_file
 from sqlalchemy import UniqueConstraint
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import csv
 import io
+import smtplib
+
+# Set up the server
+smtp_server = 'localhost'
+smtp_port = 25  # Default port for SMTP
+email_sender = 'johanochemil@magjac.com'
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
 db = SQLAlchemy(app)
 CORS(app)  # Enable Cross-Origin Resource Sharing
+
+def send_email(recipient, subject, body):
+  message = MIMEMultipart()
+  message['From'] = email_sender
+  message['To'] = recipient
+  message['Subject'] = subject
+
+  message.attach(MIMEText(body, 'plain'))
+
+  server = smtplib.SMTP(smtp_server, smtp_port)
+  server.send_message(message)
+  server.quit()
+
+def send_confirmation_email(email, name, attending, food_allergy, new):
+          subject = "Tack för din amälan till Johan och Emils bröllop" if new else "Din amälan till Johan och Emils bröllop har uppdaterats"
+          attending_yes_no = 'Ja' if attending else 'Nej'
+          food_preferences_text = f"Matpreferenser: {food_allergy}" if attending else ""
+          text = f"""Hej{name}!
+Din anmälan har nu uppdaterats med dessa uppgifter:
+
+Namn: {name}
+Kommer på bröllopet: {attending_yes_no}
+{food_preferences_text}
+
+Varma hälsningar Johan & Emil
+          """
+          send_email(email, subject, text)
 
 class RSVP(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -55,11 +90,13 @@ def rsvp():
           rsvp_to_update.attending = attending
           rsvp_to_update.food_allergy = food_allergy
           db.session.commit()
+          send_confirmation_email(email, name, attending, food_allergy, new=False)
           return jsonify({'message': 'RSVP updated'}), 200
 
     new_rsvp = RSVP(name=name, email=email, attending=attending, food_allergy=food_allergy)
     db.session.add(new_rsvp)
     db.session.commit()
+    send_confirmation_email(email, name, attending, food_allergy, new=True)
     return jsonify({'message': 'RSVP received'}), 200
 
 @app.route('/download_csv', methods=['GET'])
