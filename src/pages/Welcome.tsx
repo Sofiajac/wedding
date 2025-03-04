@@ -14,6 +14,10 @@ export const Welcome = ({ apiUrl }: WelcomeProps) => {
     setShowRsvpForm(!showRsvpForm);
   };
 
+  const hideForm = () => {
+    setShowRsvpForm(false);
+  };
+
   return (
     <div className="pageContent">
       <div className="headingsContainer">
@@ -30,8 +34,8 @@ export const Welcome = ({ apiUrl }: WelcomeProps) => {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <Button title="o.s.a." onClick={toggleForm} />
-      {showRsvpForm && <RsvpForm apiUrl={apiUrl} />}
+      {!showRsvpForm && <Button title="o.s.a." onClick={toggleForm} />}
+      {showRsvpForm && <RsvpForm apiUrl={apiUrl} hideForm={hideForm} />}
       <br />
       <a href={`${apiUrl}/download_csv`} download>
         <button>Download RSVPs as CSV</button>

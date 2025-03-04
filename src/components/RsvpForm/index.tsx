@@ -7,6 +7,7 @@ import Button from '../Button';
 
 interface RsvpFormProps {
   apiUrl: string;
+  hideForm: () => void;
 }
 
 export interface Person {
@@ -25,7 +26,7 @@ interface RawPerson {
   food_allergy: string;
 }
 
-function RsvpForm({ apiUrl }: RsvpFormProps) {
+function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
   // const RsvpForm: React.FC = ({ apiUrl } : RsvpFormProps) => {
   const [email, setEmail] = useState<string>('');
   const [error, setError] = useState('');
@@ -83,8 +84,7 @@ function RsvpForm({ apiUrl }: RsvpFormProps) {
         }
       }
       alert('RSVP received successfully!');
-      setPeople([]);
-      setEmail('');
+      hideForm();
     } catch (error) {
       console.error('Error submitting RSVP:', error);
       alert('An error occurred. Please try again.');
@@ -198,8 +198,7 @@ function RsvpForm({ apiUrl }: RsvpFormProps) {
           <Button
             title="Avbryt"
             onClick={() => {
-              setPeople([]);
-              setEmail('');
+              hideForm();
             }}
           />
           <Button title="Spara" onClick={handleSubmit} type="submit" />
