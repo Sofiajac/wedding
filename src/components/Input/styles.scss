@@ -3,11 +3,10 @@
   flex-direction: column;
 
   input {
+    font-size: 1rem;
     border: 1px solid #ccc;
     padding: 1rem;
-    font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-      'Droid Sans', 'Helvetica Neue', sans-serif;
-
+    font-family: 'PT Serif', serif;
     &.input-error {
       border: 1px solid red;
     }
