@@ -26,26 +26,30 @@ def send_email(recipient, subject, body):
   message['To'] = recipient
   message['Subject'] = subject
 
-  message.attach(MIMEText(body, 'plain'))
+  message.attach(MIMEText(body, 'html'))
 
   server = smtplib.SMTP(smtp_server, smtp_port)
   server.send_message(message)
   server.quit()
 
 def send_confirmation_email(email, name, attending, food_allergy, new):
-          subject = "Tack för din amälan till Johan och Emils bröllop" if new else "Din amälan till Johan och Emils bröllop har uppdaterats"
-          attending_yes_no = 'Ja' if attending else 'Nej'
-          food_preferences_text = f"Matpreferenser: {food_allergy}" if attending else ""
-          text = f"""Hej{name}!
-Din anmälan har nu uppdaterats med dessa uppgifter:
-
+  subject = "Tack för din amälan till Johan och Emils bröllop" if new else "Din anmälan till Johan och Emils bröllop har uppdaterats"
+  attending_yes_no = 'Ja' if attending else 'Nej'
+  food_preferences_text = f"Matpreferenser: {food_allergy}" if attending else ""
+  text = f"""<h1>Hej {name}!</h1>
+{'Du har anmält' if new else 'Din anmälan har nu uppdaterats med'} dessa uppgifter:'
+<br/>
+<br/>
 Namn: {name}
+<br/>
 Kommer på bröllopet: {attending_yes_no}
-{food_preferences_text}
+<br/>
+Kostpreferenser: {food_preferences_text}
+<br/>
+<br/>
+Varma hälsningar Johan & Emil"""
 
-Varma hälsningar Johan & Emil
-          """
-          send_email(email, subject, text)
+  send_email(email, subject, text)
 
 class RSVP(db.Model):
     id = db.Column(db.Integer, primary_key=True)
