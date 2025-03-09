@@ -13,7 +13,7 @@ import smtplib
 # Set up the server
 smtp_server = 'localhost'
 smtp_port = 25  # Default port for SMTP
-email_sender = 'johanochemil@magjac.com'
+email_sender = 'Johan & Emil <johanochemil@magjac.com>'
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
