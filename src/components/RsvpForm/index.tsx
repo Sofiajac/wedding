@@ -68,28 +68,26 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      for (var person of people) {
-        const response = await fetch(`${apiUrl}/rsvp`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id: person.id,
-            name: person.name,
-            email,
-            attending: person.attending,
-            food_allergy: person.foodAllergy,
-          }),
-        });
-        const result = await response.json();
-        if (response.ok) {
-          console.log('RSVP received:', result);
-        } else {
-          console.error('Error:', result);
-          alert('Failed to submit RSVP.');
-          break;
-        }
+      const rsvps = people.map(person => ({
+        id: person.id,
+        name: person.name,
+        email,
+        attending: person.attending,
+        food_allergy: person.foodAllergy,
+      }));
+      const response = await fetch(`${apiUrl}/rsvp`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ rsvps }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        console.log('RSVP received:', result);
+      } else {
+        console.error('Error:', result);
+        alert('Failed to submit RSVP.');
       }
       alert('RSVP received successfully!');
       hideForm();
