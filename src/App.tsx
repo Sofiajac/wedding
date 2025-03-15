@@ -3,14 +3,14 @@ import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Button from "./components/Button";
 import Navbar from "./components/Navbar";
-import { FAQ, Program, Travel, Welcome } from "./components/pages";
+import { FAQ, Program, Travel, Welcome } from "./pages";
 
 interface AppProps {
   baseUrl: string;
 }
 
 export function App({ baseUrl }: AppProps) {
-  const apiUrl = process.env.NODE_ENV === "production" ? `${baseUrl}/api` : "http://localhost:5000";
+  const apiUrl = process.env.NODE_ENV === "production" ? `${baseUrl}/api` : "http://localhost:5001";
   return (
     <div className="container">
       <header className="header">
