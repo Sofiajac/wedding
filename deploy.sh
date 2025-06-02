@@ -2,9 +2,10 @@
 
 set -eux
 
-application="wedding"
+application="johanochemil"
 paths="program travel faq"
 remote_www_dir="www"
+var_www_html_dir="/var/www/html"
 server="magjac.com"
 
 if [[ $# != 0 ]]; then
@@ -34,8 +35,13 @@ for path in $paths; do
   ssh -p 7822 ${server} "ln -nsf . ${remote_dir}/${path}"
 done
 
-# Do this manually once
-# sudo ln -s /home/magjac/www/wedding /var/www/html
+ssh -p 7822 magjac.com -t "
+  if [[ ! -e ${var_www_html_dir}/${application} ]]; then
+    sudo ln -s \$HOME/${remote_dir} ${var_www_html_dir};
+  fi
+"
+
+ssh -p 7822 ${server} "chmod a+x ${remote_dir}"
 
 ssh -p 7822 ${server} systemctl --user daemon-reload
 ssh -p 7822 ${server} systemctl --user enable ${application}
