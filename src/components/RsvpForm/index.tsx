@@ -82,9 +82,9 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
         name: person.name,
         email,
         attending: person.attending,
-        housing: person.housing,
-        boat_to: person.boat_to,
-        boat_from: person.boat_from,
+        housing: person.housing ? person.attending : false,
+        boat_to: person.boat_to ? person.attending : false,
+        boat_from: person.boat_from ? person.attending : false,
         food_allergy: person.foodAllergy,
       }));
       const response = await fetch(`${apiUrl}/rsvp`, {
