@@ -84,6 +84,24 @@ const PersonComponent: React.FC<PersonProps> = ({
               onChange={() => updatePerson(index, { ...person, boat_to: false })}
             />
           </div>
+          <div className="radio-buttons">
+            <RadioButton
+              label="Jag reser med bokad båt från Arholma"
+              name={`boat_from-${index}`} // Unique name for each person
+              value="yes"
+              checked={person.boat_from}
+              onChange={() => updatePerson(index, { ...person, boat_from: true })}
+            />
+            <RadioButton
+              label="Jag tar mig från Arholma på egen hand"
+              name={`boat_from-${index}`} // Unique name for each person
+              value="no"
+              checked={
+                person.boat_from === undefined ? undefined : !person.boat_from
+              }
+              onChange={() => updatePerson(index, { ...person, boat_from: false })}
+            />
+          </div>
           <InputField
             name="foodPrefererence"
             label="Matpreferenser"

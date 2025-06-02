@@ -17,6 +17,7 @@ export interface Person {
   attending: boolean | undefined;
   housing: boolean | undefined;
   boat_to: boolean | undefined;
+  boat_from: boolean | undefined;
   foodAllergy: string;
 }
 
@@ -27,6 +28,7 @@ interface RawPerson {
   attending: boolean | undefined;
   housing: boolean | undefined;
   boat_to: boolean | undefined;
+  boat_from: boolean | undefined;
   food_allergy: string;
 }
 
@@ -43,6 +45,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     attending: undefined,
     housing: undefined,
     boat_to: undefined,
+    boat_from: undefined,
     foodAllergy: '',
   };
 
@@ -81,6 +84,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
         attending: person.attending,
         housing: person.housing,
         boat_to: person.boat_to,
+        boat_from: person.boat_from,
         food_allergy: person.foodAllergy,
       }));
       const response = await fetch(`${apiUrl}/rsvp`, {
