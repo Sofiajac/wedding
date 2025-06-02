@@ -1,18 +1,16 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react';
+import './styles.scss';
 
 interface ButtonProps {
   title: string;
-  onClick: () => void;
+  onClick?: ((e: React.FormEvent<HTMLButtonElement>) => void) | (() => void);
+  type?: 'submit' | 'reset' | 'button';
   wide?: boolean;
 }
 
-function Button({ title, wide, onClick }: ButtonProps) {
+function Button({ title, onClick, type = 'button', wide }: ButtonProps) {
   return (
-    <button
-      className={wide ? "wide" : ""}
-      onClick={onClick}
-    >
+    <button type={type} className={wide ? 'wide' : ''} onClick={onClick}>
       {title}
     </button>
   );
