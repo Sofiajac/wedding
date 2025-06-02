@@ -27,7 +27,8 @@ const PersonComponent: React.FC<PersonProps> = ({
         }
         required
       />
-      <div className="radio-buttons">
+      <fieldset className="radio-buttons">
+        <legend>Deltagande</legend>
         <RadioButton
           label="Jag kommer"
           name={`attending-${index}`} // Unique name for each person
@@ -44,11 +45,12 @@ const PersonComponent: React.FC<PersonProps> = ({
           }
           onChange={() => updatePerson(index, { ...person, attending: false })}
         />
-      </div>
+      </fieldset>
 
       {person.attending && (
         <div>
-          <div className="radio-buttons">
+          <fieldset className="radio-buttons vertical">
+            <legend>Boende</legend>
             <RadioButton
               label="Jag bor på bokat boende"
               name={`housing-${index}`} // Unique name for each person
@@ -57,16 +59,19 @@ const PersonComponent: React.FC<PersonProps> = ({
               onChange={() => updatePerson(index, { ...person, housing: true })}
             />
             <RadioButton
-              label="Jag kommer inte"
+              label="Jag ordnar eget boende eller sover inte över"
               name={`housing-${index}`} // Unique name for each person
               value="no"
               checked={
                 person.housing === undefined ? undefined : !person.housing
               }
-              onChange={() => updatePerson(index, { ...person, housing: false })}
+              onChange={() =>
+                updatePerson(index, { ...person, housing: false })
+              }
             />
-          </div>
-          <div className="radio-buttons">
+          </fieldset>
+          <fieldset className="radio-buttons vertical">
+            <legend>Utresa till Arholma</legend>
             <RadioButton
               label="Jag reser med bokad båt till Arholma"
               name={`boat_to-${index}`} // Unique name for each person
@@ -81,16 +86,21 @@ const PersonComponent: React.FC<PersonProps> = ({
               checked={
                 person.boat_to === undefined ? undefined : !person.boat_to
               }
-              onChange={() => updatePerson(index, { ...person, boat_to: false })}
+              onChange={() =>
+                updatePerson(index, { ...person, boat_to: false })
+              }
             />
-          </div>
-          <div className="radio-buttons">
+          </fieldset>
+          <fieldset className="radio-buttons vertical">
+            <legend>Hemresa</legend>
             <RadioButton
               label="Jag reser med bokad båt från Arholma"
               name={`boat_from-${index}`} // Unique name for each person
               value="yes"
               checked={person.boat_from}
-              onChange={() => updatePerson(index, { ...person, boat_from: true })}
+              onChange={() =>
+                updatePerson(index, { ...person, boat_from: true })
+              }
             />
             <RadioButton
               label="Jag tar mig från Arholma på egen hand"
@@ -99,9 +109,11 @@ const PersonComponent: React.FC<PersonProps> = ({
               checked={
                 person.boat_from === undefined ? undefined : !person.boat_from
               }
-              onChange={() => updatePerson(index, { ...person, boat_from: false })}
+              onChange={() =>
+                updatePerson(index, { ...person, boat_from: false })
+              }
             />
-          </div>
+          </fieldset>
           <InputField
             name="foodPrefererence"
             label="Matpreferenser"

@@ -5,8 +5,19 @@
   padding: 1rem;
   gap: 1rem;
 
+  fieldset {
+    border: none;
+    legend {
+      font-weight: bold;
+    }
+  }
+
   .radio-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem 1rem;
+    &.vertical {
+      margin-bottom: 1rem;
+      flex-direction: column;
+    }
   }
 }

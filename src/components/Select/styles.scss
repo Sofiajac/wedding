@@ -1,6 +1,10 @@
 .select-container {
   display: flex;
   flex-direction: column;
+
+  label {
+    font-weight: bold;
+  }
   
   .inner-container {
     position: relative;

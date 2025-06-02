@@ -1,5 +1,17 @@
 .container {
   background-color: #fdf5e5;
+
+  @media (min-width: 900px) {
+    display: flex;
+  }
+}
+
+header {
+  @media (min-width: 900px) {
+    position: fixed;
+    width: 50%;
+  }
+
 }
 
 .imageBanner {
@@ -27,8 +39,11 @@
 }
 
 .pagesContainer {
-  padding-left: 8rem;
-  padding-right: 8rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  @media (min-width: 900px) {
+    margin-left: 50%;
+  }
   @media (max-width: 600px) {
     padding-left: 0;
     padding-right: 0;
@@ -38,8 +53,7 @@
 .pageContent {
   display: flex;
   flex-direction: column;
-  max-width: 32rem;
-  gap: 1rem;
+  max-width: 36rem;
   padding: 1rem;
   .headingsContainer {
     display: flex;
