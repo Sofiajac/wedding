@@ -84,6 +84,11 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     if (!errorDetected) {
       setSubmitError('');
     }
+    if (updatedPerson.attending === false) {
+      updatedPerson.housing = undefined;
+      updatedPerson.boat_to = undefined;
+      updatedPerson.boat_from = undefined;
+    }
   };
 
   const setNumPeople = (numPeople: number) => {
