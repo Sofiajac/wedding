@@ -8,6 +8,7 @@ export interface PersonProps {
   index: number;
   person: Person;
   updatePerson: (index: number, updatedPerson: Person) => void;
+  housingError?: string; // Optional error message
 }
 
 const PersonComponent: React.FC<PersonProps> = ({
@@ -69,6 +70,7 @@ const PersonComponent: React.FC<PersonProps> = ({
                 updatePerson(index, { ...person, housing: false })
               }
             />
+          {person.housingError && <p className="error-message">Välj ett alternativ</p>}
           </fieldset>
           <fieldset className="radio-buttons vertical">
             <legend>Utresa till Arholma</legend>

@@ -16,6 +16,7 @@ export interface Person {
   email: string;
   attending: boolean | undefined;
   housing: boolean | undefined;
+  housingError: boolean;
   boat_to: boolean | undefined;
   boat_from: boolean | undefined;
   foodAllergy: string;
@@ -36,6 +37,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
   // const RsvpForm: React.FC = ({ apiUrl } : RsvpFormProps) => {
   const [email, setEmail] = useState<string>('');
   const [error, setError] = useState('');
+  const [submitError, setSubmitError] = useState('');
   const [people, setPeople] = useState<Person[]>([]);
 
   const emptyPerson = {
@@ -44,6 +46,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     email: email,
     attending: undefined,
     housing: undefined,
+    housingError: false,
     boat_to: undefined,
     boat_from: undefined,
     foodAllergy: '',
@@ -77,6 +80,15 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      let errorDetected = false;
+      people.forEach(person => {
+        person.housingError = person.housing === undefined;
+        errorDetected ||= person.housingError;
+      });
+      if (errorDetected) {
+        setSubmitError('Fyll i hela formuläret');
+        return;
+      }
       const rsvps = people.map(person => ({
         id: person.id,
         name: person.name,
@@ -220,6 +232,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
             }}
           />
           <Button title="Spara" onClick={handleSubmit} type="submit" />
+          {submitError && (<p className="error-message">{submitError}</p>)}
         </div>
       )}
     </form>
