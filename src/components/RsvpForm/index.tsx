@@ -18,6 +18,7 @@ export interface Person {
   housing: boolean | undefined;
   housingError: boolean;
   boat_to: boolean | undefined;
+  boatToError: boolean;
   boat_from: boolean | undefined;
   foodAllergy: string;
 }
@@ -48,6 +49,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     housing: undefined,
     housingError: false,
     boat_to: undefined,
+    boatToError: false,
     boat_from: undefined,
     foodAllergy: '',
   };
@@ -84,6 +86,8 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
       people.forEach(person => {
         person.housingError = person.housing === undefined;
         errorDetected ||= person.housingError;
+        person.boatToError = person.boat_to === undefined;
+        errorDetected ||= person.boatToError;
       });
       if (errorDetected) {
         setSubmitError('Fyll i hela formuläret');

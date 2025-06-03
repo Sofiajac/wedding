@@ -9,6 +9,7 @@ export interface PersonProps {
   person: Person;
   updatePerson: (index: number, updatedPerson: Person) => void;
   housingError?: string; // Optional error message
+  boatToError?: string; // Optional error message
 }
 
 const PersonComponent: React.FC<PersonProps> = ({
@@ -92,6 +93,7 @@ const PersonComponent: React.FC<PersonProps> = ({
                 updatePerson(index, { ...person, boat_to: false })
               }
             />
+          {person.boatToError && <p className="error-message">Välj ett alternativ</p>}
           </fieldset>
           <fieldset className="radio-buttons vertical">
             <legend>Hemresa</legend>
