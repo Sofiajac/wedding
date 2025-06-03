@@ -35,8 +35,8 @@ def send_email(recipient, subject, body):
 def send_confirmation_email(email, rsvps, new):
   subject = "Du är med på gästlistan - nu blir det fest!" if new else "Din anmälan till Johan och Emils bröllop har uppdaterats"
 
-  body = f"""<h1>Yay! Vi har fått din OSA och är superglada att du kommer!</h1>
-<br />
+  body = f"""<div style="background-color: #fdf5e5; padding: 1rem; font-family: Georgia">
+<h1 style="font-size: 1.5rem">Yay! Vi har fått ditt svar och är superglada att du kommer!</h1>
 Snart blir det bubbel  och skärgårdshäng långt in på småtimmarna. Håll koll i inkorgen - vi skickar mer info längre fram.
 <br />
 <br />
@@ -89,6 +89,7 @@ Reser med bokad båt från Arholma: {boat_from_text}
   0739062545
   <br/>
   Emil.odegaard.jacobsson@gmail.com
+  </div>
   """
 
   print(body)

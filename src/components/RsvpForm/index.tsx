@@ -139,7 +139,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
         alert('Failed to submit RSVP.');
       }
       alert(
-        'Tack för ditt svar!\nDu ska ha fått ett bekräftelsemail - kolla gärna i skräpposten om det inte dyker upp inom några minuter.'
+        '\nTack för ditt svar!\n\nDu ska ha fått ett bekräftelsemail - kolla gärna i skräpposten om det inte dyker upp inom några minuter.'
       );
       hideForm();
     } catch (error) {

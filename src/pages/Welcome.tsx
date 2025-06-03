@@ -133,9 +133,6 @@ export const Welcome = ({ apiUrl }: WelcomeProps) => {
       {!showRsvpForm && <Button title="OSA" onClick={toggleForm} />}
       {showRsvpForm && <RsvpForm apiUrl={apiUrl} hideForm={hideForm} />}
       <br />
-      <a href={`${apiUrl}/download_csv`} download>
-        <button>Download RSVPs as CSV</button>
-      </a>
     </div>
   );
 };
