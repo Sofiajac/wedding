@@ -60,6 +60,20 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     setPeople((prevPeople) =>
       prevPeople.map((person, i) => (i === index ? updatedPerson : person))
     );
+
+    if (updatedPerson.housing !== undefined) {
+      updatedPerson.housingError = false;
+    }
+    if (updatedPerson.boat_to !== undefined) {
+      updatedPerson.boatToError = false;
+    }
+    if (updatedPerson.boat_from !== undefined) {
+      updatedPerson.boatFromError = false;
+    }
+    const errorDetected = updatedPerson.housingError || updatedPerson.boatToError || updatedPerson.boatFromError;
+    if (!errorDetected) {
+      setSubmitError('');
+    }
   };
 
   const setNumPeople = (numPeople: number) => {
