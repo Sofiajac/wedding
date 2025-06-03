@@ -114,11 +114,11 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
         errorDetected ||= person.nameError;
         person.attendingError = person.attending === undefined;
         errorDetected ||= person.attendingError;
-        person.housingError = person.housing === undefined;
+        person.housingError = person.housing === undefined && person.attending === true;
         errorDetected ||= person.housingError;
-        person.boatToError = person.boat_to === undefined;
+        person.boatToError = person.boat_to === undefined && person.attending === true;
         errorDetected ||= person.boatToError;
-        person.boatFromError = person.boat_from === undefined;
+        person.boatFromError = person.boat_from === undefined && person.attending === true;
         errorDetected ||= person.boatFromError;
       });
       if (errorDetected) {
