@@ -33,9 +33,12 @@ def send_email(recipient, subject, body):
   server.quit()
 
 def send_confirmation_email(email, rsvps, new):
-  subject = "Tack för din anmälan till Johan och Emils bröllop" if new else "Din anmälan till Johan och Emils bröllop har uppdaterats"
+  subject = "Du är med på gästlistan - nu blir det fest!" if new else "Din anmälan till Johan och Emils bröllop har uppdaterats"
 
-  body = f"""<h1>Hej!</h1>
+  body = f"""<h1>Yay! Vi har fått din OSA och är superglada att du kommer!</h1>
+<br />
+Snart blir det bubbel  och skärgårdshäng långt in på småtimmarna. Håll koll i inkorgen - vi skickar mer info längre fram.
+<br />
 <br />
 {'Du har anmält' if new else 'Din anmälan har nu uppdaterats med'} dessa uppgifter:
 <br/>
@@ -58,14 +61,37 @@ def send_confirmation_email(email, rsvps, new):
 Kommer på bröllopet: {attending_yes_no}
 <br/>
 Kostpreferenser: {food_preferences_text}
+<br/>
 Bor på det bokade boendet: {housing_text}
+<br/>
 Reser med bokad båt till Arholma: {boat_to_text}
+<br/>
 Reser med bokad båt från Arholma: {boat_from_text}
 <br/>
 <br/>
 """
-  body += f"""Varma hälsningar Johan & Emil"""
+  body += f"""Puss & kram,
+  <br/>
+  Johan & Emil
+  <br/>
+  <br/>
+  Detta mail går ej att svara på, men har du frågor kontakta oss på:
+  <br/>
+  Johan:
+  <br/>
+  0709624422
+  <br/>
+  blixthjohan@gmail.com
+  <br/>
+  <br/>
+  Emil:
+  <br/>
+  0739062545
+  <br/>
+  Emil.odegaard.jacobsson@gmail.com
+  """
 
+  print(body)
   send_email(email, subject, body)
 
 class RSVP(db.Model):

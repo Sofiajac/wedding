@@ -70,7 +70,10 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     if (updatedPerson.boat_from !== undefined) {
       updatedPerson.boatFromError = false;
     }
-    const errorDetected = updatedPerson.housingError || updatedPerson.boatToError || updatedPerson.boatFromError;
+    const errorDetected =
+      updatedPerson.housingError ||
+      updatedPerson.boatToError ||
+      updatedPerson.boatFromError;
     if (!errorDetected) {
       setSubmitError('');
     }
@@ -99,7 +102,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     e.preventDefault();
     try {
       let errorDetected = false;
-      people.forEach(person => {
+      people.forEach((person) => {
         person.housingError = person.housing === undefined;
         errorDetected ||= person.housingError;
         person.boatToError = person.boat_to === undefined;
@@ -108,10 +111,10 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
         errorDetected ||= person.boatFromError;
       });
       if (errorDetected) {
-        setSubmitError('Fyll i hela formuläret');
+        setSubmitError('Hoppsan! Du glömde fylla i allt vi behöver veta.');
         return;
       }
-      const rsvps = people.map(person => ({
+      const rsvps = people.map((person) => ({
         id: person.id,
         name: person.name,
         email,
@@ -135,7 +138,9 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
         console.error('Error:', result);
         alert('Failed to submit RSVP.');
       }
-      alert('RSVP received successfully!');
+      alert(
+        'Tack för ditt svar!\nDu ska ha fått ett bekräftelsemail - kolla gärna i skräpposten om det inte dyker upp inom några minuter.'
+      );
       hideForm();
     } catch (error) {
       console.error('Error submitting RSVP:', error);
@@ -246,16 +251,18 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
           />
         ))}
       {!error && numPeople > 0 && (
-        <div className="buttons">
-          <Button
-            title="Avbryt"
-            onClick={() => {
-              hideForm();
-            }}
-          />
-          <Button title="Spara" onClick={handleSubmit} type="submit" />
-          {submitError && (<p className="error-message">{submitError}</p>)}
-        </div>
+        <>
+          {submitError && <p className="error-message">{submitError}</p>}
+          <div className="buttons">
+            <Button
+              title="Avbryt"
+              onClick={() => {
+                hideForm();
+              }}
+            />
+            <Button title="Spara" onClick={handleSubmit} type="submit" />
+          </div>
+        </>
       )}
     </form>
   );
