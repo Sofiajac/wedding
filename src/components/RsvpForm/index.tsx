@@ -13,6 +13,7 @@ interface RsvpFormProps {
 export interface Person {
   id: number | null;
   name: string;
+  nameError: boolean;
   email: string;
   attending: boolean | undefined;
   housing: boolean | undefined;
@@ -45,6 +46,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
   const emptyPerson = {
     id: null,
     name: '',
+    nameError: false,
     email: email,
     attending: undefined,
     housing: undefined,
@@ -61,6 +63,9 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
       prevPeople.map((person, i) => (i === index ? updatedPerson : person))
     );
 
+    if (updatedPerson.name !== '') {
+      updatedPerson.nameError = false;
+    }
     if (updatedPerson.housing !== undefined) {
       updatedPerson.housingError = false;
     }
@@ -70,10 +75,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     if (updatedPerson.boat_from !== undefined) {
       updatedPerson.boatFromError = false;
     }
-    const errorDetected =
-      updatedPerson.housingError ||
-      updatedPerson.boatToError ||
-      updatedPerson.boatFromError;
+    const errorDetected = updatedPerson.nameError || updatedPerson.housingError || updatedPerson.boatToError || updatedPerson.boatFromError;
     if (!errorDetected) {
       setSubmitError('');
     }
@@ -102,7 +104,9 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     e.preventDefault();
     try {
       let errorDetected = false;
-      people.forEach((person) => {
+      people.forEach(person => {
+        person.nameError = person.name === '';
+        errorDetected ||= person.nameError;
         person.housingError = person.housing === undefined;
         errorDetected ||= person.housingError;
         person.boatToError = person.boat_to === undefined;
