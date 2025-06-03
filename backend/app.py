@@ -77,6 +77,7 @@ Reser med bokad båt från Arholma: {boat_from_text}
   <br/>
   Detta mail går ej att svara på, men har du frågor kontakta oss på:
   <br/>
+  <br/>
   Johan:
   <br/>
   0709624422
