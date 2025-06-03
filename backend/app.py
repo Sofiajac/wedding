@@ -132,6 +132,21 @@ def fetch():
 def rsvp():
     data = request.json
     rsvps = data.get('rsvps')
+
+    data = request.json
+    first_rsvp = rsvps[0]
+    email = first_rsvp.get('email')
+
+    # Get all existing RSVP entries for this email
+    existing_rsvps = RSVP.query.filter_by(email=email).all()
+    existing_ids = {rsvp.id for rsvp in existing_rsvps}
+    incoming_ids = {rsvp.get('id') for rsvp in rsvps if rsvp.get('id') is not None}
+
+    # Delete entries that are no longer in the incoming data
+    for rsvp in existing_rsvps:
+        if rsvp.id not in incoming_ids:
+            db.session.delete(rsvp)
+
     new = True
     for rsvp_data in rsvps:
       id = rsvp_data.get('id')
