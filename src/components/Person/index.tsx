@@ -10,6 +10,7 @@ export interface PersonProps {
   updatePerson: (index: number, updatedPerson: Person) => void;
   housingError?: string; // Optional error message
   boatToError?: string; // Optional error message
+  boatFromError?: string; // Optional error message
 }
 
 const PersonComponent: React.FC<PersonProps> = ({
@@ -117,6 +118,7 @@ const PersonComponent: React.FC<PersonProps> = ({
                 updatePerson(index, { ...person, boat_from: false })
               }
             />
+          {person.boatFromError && <p className="error-message">Välj ett alternativ</p>}
           </fieldset>
           <InputField
             name="foodPrefererence"

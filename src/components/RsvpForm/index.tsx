@@ -20,6 +20,7 @@ export interface Person {
   boat_to: boolean | undefined;
   boatToError: boolean;
   boat_from: boolean | undefined;
+  boatFromError: boolean;
   foodAllergy: string;
 }
 
@@ -51,6 +52,7 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     boat_to: undefined,
     boatToError: false,
     boat_from: undefined,
+    boatFromError: false,
     foodAllergy: '',
   };
 
@@ -88,6 +90,8 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
         errorDetected ||= person.housingError;
         person.boatToError = person.boat_to === undefined;
         errorDetected ||= person.boatToError;
+        person.boatFromError = person.boat_from === undefined;
+        errorDetected ||= person.boatFromError;
       });
       if (errorDetected) {
         setSubmitError('Fyll i hela formuläret');
