@@ -89,7 +89,7 @@ Reser med bokad båt från Arholma: {boat_from_text}
   <br/>
   0739062545
   <br/>
-  Emil.odegaard.jacobsson@gmail.com
+  emil.odegaard.jacobsson@gmail.com
   </div>
   """
 

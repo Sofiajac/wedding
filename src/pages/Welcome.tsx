@@ -105,7 +105,7 @@ export const Welcome = ({ apiUrl }: WelcomeProps) => {
           Tel: <a href="tel:0709624422">0709624422</a>
           <br />
           E-post:{' '}
-          <a href="mailto:Blixthjohan@gmail.com">Blixthjohan@gmail.com</a>
+          <a href="mailto:blixthjohan@gmail.com">blixthjohan@gmail.com</a>
         </p>
         <br />
 
@@ -114,8 +114,8 @@ export const Welcome = ({ apiUrl }: WelcomeProps) => {
           Tel: <a href="tel:0739062545">0739062545</a>
           <br />
           E-post:{' '}
-          <a href="mailto:Emil.odegaard.jacobsson@gmail.com">
-            Emil.odegaard.jacobsson@gmail.com
+          <a href="mailto:emil.odegaard.jacobsson@gmail.com">
+            emil.odegaard.jacobsson@gmail.com
           </a>
         </p>
       </section>
