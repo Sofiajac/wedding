@@ -8,6 +8,8 @@ export interface PersonProps {
   index: number;
   person: Person;
   updatePerson: (index: number, updatedPerson: Person) => void;
+  nameError?: string; // Optional error message
+  attendingError?: string; // Optional error message
   housingError?: string; // Optional error message
   boatToError?: string; // Optional error message
   boatFromError?: string; // Optional error message
@@ -29,6 +31,7 @@ const PersonComponent: React.FC<PersonProps> = ({
           updatePerson(index, { ...person, name: e.target.value })
         }
         required
+        error={person.nameError ? 'Fyll i ett namn' : ''}
       />
       <fieldset className="radio-buttons">
         <legend>Deltagande</legend>
@@ -48,6 +51,7 @@ const PersonComponent: React.FC<PersonProps> = ({
           }
           onChange={() => updatePerson(index, { ...person, attending: false })}
         />
+        {person.attendingError && <p className="error-message">Välj ett alternativ</p>}
       </fieldset>
 
       {person.attending && (

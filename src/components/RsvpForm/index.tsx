@@ -13,8 +13,10 @@ interface RsvpFormProps {
 export interface Person {
   id: number | null;
   name: string;
+  nameError: boolean;
   email: string;
   attending: boolean | undefined;
+  attendingError: boolean;
   housing: boolean | undefined;
   housingError: boolean;
   boat_to: boolean | undefined;
@@ -45,8 +47,10 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
   const emptyPerson = {
     id: null,
     name: '',
+    nameError: false,
     email: email,
     attending: undefined,
+    attendingError: false,
     housing: undefined,
     housingError: false,
     boat_to: undefined,
@@ -61,6 +65,12 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
       prevPeople.map((person, i) => (i === index ? updatedPerson : person))
     );
 
+    if (updatedPerson.name !== '') {
+      updatedPerson.nameError = false;
+    }
+    if (updatedPerson.attending !== undefined) {
+      updatedPerson.attendingError = false;
+    }
     if (updatedPerson.housing !== undefined) {
       updatedPerson.housingError = false;
     }
@@ -70,12 +80,14 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     if (updatedPerson.boat_from !== undefined) {
       updatedPerson.boatFromError = false;
     }
-    const errorDetected =
-      updatedPerson.housingError ||
-      updatedPerson.boatToError ||
-      updatedPerson.boatFromError;
+    const errorDetected = updatedPerson.nameError || updatedPerson.housingError || updatedPerson.attendingError || updatedPerson.boatToError || updatedPerson.boatFromError;
     if (!errorDetected) {
       setSubmitError('');
+    }
+    if (updatedPerson.attending === false) {
+      updatedPerson.housing = undefined;
+      updatedPerson.boat_to = undefined;
+      updatedPerson.boat_from = undefined;
     }
   };
 
@@ -102,12 +114,16 @@ function RsvpForm({ apiUrl, hideForm }: RsvpFormProps) {
     e.preventDefault();
     try {
       let errorDetected = false;
-      people.forEach((person) => {
-        person.housingError = person.housing === undefined;
+      people.forEach(person => {
+        person.nameError = person.name === '';
+        errorDetected ||= person.nameError;
+        person.attendingError = person.attending === undefined;
+        errorDetected ||= person.attendingError;
+        person.housingError = person.housing === undefined && person.attending === true;
         errorDetected ||= person.housingError;
-        person.boatToError = person.boat_to === undefined;
+        person.boatToError = person.boat_to === undefined && person.attending === true;
         errorDetected ||= person.boatToError;
-        person.boatFromError = person.boat_from === undefined;
+        person.boatFromError = person.boat_from === undefined && person.attending === true;
         errorDetected ||= person.boatFromError;
       });
       if (errorDetected) {
